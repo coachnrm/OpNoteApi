@@ -1,0 +1,6 @@
+@OpNoteApi_HostAddress = http://localhost:5047
+
+GET {{OpNoteApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
