@@ -14,10 +14,14 @@ public class OpNote
     public List<string> Surgeons { get; set; } = new List<string>();
     // public string Assist {get; set;}
     public List<string> Assist { get; set; } = new List<string>();
-    public string ScrubNurse {get; set;}
-    public string CirculateNurse {get; set;}
-    public string Anesthesiologist {get; set;}
-    public string NurseAnesthetis {get; set;}
+    // public string ScrubNurse {get; set;}
+    public List<string> ScrubNurse { get; set; } = new List<string>();
+    // public string CirculateNurse {get; set;}
+    public List<string> CirculateNurse { get; set; } = new List<string>();
+    // public string Anesthesiologist {get; set;}
+    public List<string> Anesthesiologist { get; set; } = new List<string>();
+    // public string NurseAnesthetis {get; set;}
+    public List<string> NurseAnesthetis { get; set; } = new List<string>();
     public string PreopDx {get; set;}
     public string PostopDx {get; set;}
     public string Operation {get; set;}

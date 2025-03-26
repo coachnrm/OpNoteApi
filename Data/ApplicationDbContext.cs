@@ -12,4 +12,5 @@ public class ApplicationDbContext : DbContext
     }
     public DbSet<OpNote> OpNotes {get; set;}
     public DbSet<OpTemplate> OpTemplates {get; set;}
+    public DbSet<OpPicture> OpPictures {get; set;}
 }
