@@ -50,7 +50,7 @@ namespace OpNoteApi.Controllers
         // POST: api/addpicture
         [HttpPost("addpicture")]
         // [Consumes("multipart/form-data")]
-        public async Task<ActionResult<OpNote>> CreatePicture(IFormFile? formFile, [FromForm] OpPictureDto note)
+        public async Task<ActionResult<OpPicture>> CreatePicture(IFormFile? formFile, [FromForm] OpPictureDto note)
         {
             ApiResponse response = new ApiResponse();
             try

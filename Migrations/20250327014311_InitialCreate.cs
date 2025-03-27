@@ -72,7 +72,7 @@ namespace OpNoteApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OpType = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Content = table.Column<byte[]>(type: "longblob", nullable: false)
+                    Content = table.Column<byte[]>(type: "longblob", nullable: true)
                 },
                 constraints: table =>
                 {

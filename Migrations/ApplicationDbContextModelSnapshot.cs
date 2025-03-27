@@ -116,7 +116,6 @@ namespace OpNoteApi.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<byte[]>("Content")
-                        .IsRequired()
                         .HasColumnType("longblob");
 
                     b.Property<string>("Hn")

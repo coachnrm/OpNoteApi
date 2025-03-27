@@ -8,5 +8,5 @@ public class OpPicture
     public string Hn {get; set;}
     public string An {get; set;}
     public string OpType {get; set;}
-    public byte[] Content {get; set;}
+    public byte[]? Content {get; set;}
 }

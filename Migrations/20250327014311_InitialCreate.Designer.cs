@@ -12,7 +12,7 @@ using OpNoteApi.Data;
 namespace OpNoteApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250326062307_InitialCreate")]
+    [Migration("20250327014311_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -119,7 +119,6 @@ namespace OpNoteApi.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<byte[]>("Content")
-                        .IsRequired()
                         .HasColumnType("longblob");
 
                     b.Property<string>("Hn")
