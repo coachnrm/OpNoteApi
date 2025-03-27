@@ -167,6 +167,53 @@ namespace OpNoteApi.Controllers
             }
         }
 
+        // PUT: api/updatepicture2/{id}
+        [HttpPut("updatepicture2/{id}")]
+        public async Task<IActionResult> UpdatePicture2(int id, [FromForm] OpPicture2Dto note)
+        {
+            ApiResponse response = new ApiResponse();
+
+            try
+            {
+                var existingPicture = await _context.OpPictures.FindAsync(id);
+                if (existingPicture == null)
+                {
+                    response.ResponseCode = 404;
+                    response.Result = "Picture not found.";
+                    return NotFound(response);
+                }
+
+                // Update fields
+                existingPicture.Hn = note.Hn;
+                existingPicture.An = note.An;
+                existingPicture.OpType = note.OpType;
+
+                // Update picture content if a new file is provided
+                if (note.File != null && note.File.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await note.File.CopyToAsync(memoryStream);
+                        existingPicture.Content = memoryStream.ToArray();
+                    }
+                }
+
+                _context.Entry(existingPicture).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                response.ResponseCode = 200;
+                response.Result = "Picture updated successfully.";
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.ResponseCode = 500;
+                response.Errormessage = ex.Message;
+                return StatusCode(500, response);
+            }
+        }
+
+
 
         // PUT: api/OpNotes/{id}
         [HttpPut("{id}")]
