@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OpNoteApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a49660851298aa5b6a95237826e1ec1927b1d14c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db02c593601e2ec7e88eb7d7cf4b415738bdba13")]
 [assembly: System.Reflection.AssemblyProductAttribute("OpNoteApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OpNoteApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

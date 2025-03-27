@@ -47,6 +47,38 @@ namespace OpNoteApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = note.Id }, note);
         }
 
+        // GET: api/getpictures/{an}
+        [HttpGet("getpictures/{an}")]
+        public async Task<ActionResult<IEnumerable<OpPicture>>> GetPicturesByAn(string an)
+        {
+            try
+            {
+                var pictures = await _context.OpPictures
+                    .Where(p => p.An == an)
+                    .Select(p => new OpPicture
+                    {
+                        Id = p.Id,
+                        Hn = p.Hn,
+                        An = p.An,
+                        OpType = p.OpType,
+                        Content = p.Content  // Convert byte[] to Base64 string
+                    })
+                    .ToListAsync();
+
+                if (pictures == null)
+                {
+                    return NotFound(new { Message = "No pictures found for the given AN." });
+                }
+
+                return Ok(pictures);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = ex.Message });
+            }
+        }
+
+
         // POST: api/addpicture
         [HttpPost("addpicture")]
         // [Consumes("multipart/form-data")]
@@ -62,6 +94,50 @@ namespace OpNoteApi.Controllers
                     using (var memoryStream = new MemoryStream())
                     {
                         await formFile.CopyToAsync(memoryStream);
+                        imageBytes = memoryStream.ToArray();
+                    }
+                }
+
+                // Save the image to the database (even if null)
+                var opPicture = new OpPicture
+                {
+                    Hn = note.Hn,
+                    An = note.An,
+                    OpType = note.OpType,
+                    Content = imageBytes
+                };
+
+                // Save opPicture to database
+                _context.OpPictures.Add(opPicture);
+                await _context.SaveChangesAsync();
+
+                response.ResponseCode = 200;
+                response.Result = "Picture uploaded successfully.";
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.ResponseCode = 500;
+                response.Errormessage = ex.Message;
+                return StatusCode(500, response);
+            }
+        }
+
+        // POST: api/addpicture
+        [HttpPost("addpicture2")]
+        // [Consumes("multipart/form-data")]
+        public async Task<ActionResult<OpPicture>> CreatePicture2([FromForm] OpPicture2Dto note)
+        {
+            ApiResponse response = new ApiResponse();
+            try
+            {
+                byte[]? imageBytes = null;
+
+                if (note.File != null && note.File.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await note.File.CopyToAsync(memoryStream);
                         imageBytes = memoryStream.ToArray();
                     }
                 }
